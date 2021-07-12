@@ -1,0 +1,9 @@
+{
+    "apps": [
+        {
+            "name": "inventory-backend",
+            "script": "npm",
+            "args" : "run run"
+        }
+    ]
+}

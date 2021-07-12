@@ -1,0 +1,32 @@
+{
+  "name": "inventory-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --exec npm run babel-node -- ./src/index.js",
+    "clean": "rm -rf build && mkdir build",
+    "build-babel": "babel -d ./build ./src -s --copy-files",
+    "build": "npm run clean && npm run build-babel",
+    "serve": "NODE_ENV=production node -r dotenv/config ./build/index.js",
+    "run": "npm run build && npm run serve",
+    "babel-node": "babel-node"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.14.5",
+    "@babel/core": "^7.14.6",
+    "@babel/node": "^7.14.7",
+    "@babel/plugin-transform-runtime": "^7.14.5",
+    "@babel/preset-env": "^7.14.7"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1",
+    "@babel/runtime": "^7.14.6",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.13.0",
+    "nodemon": "^2.0.7"
+  }
+}

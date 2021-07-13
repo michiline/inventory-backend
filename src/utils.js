@@ -25,12 +25,16 @@ export const catchErrors = (err, req, res, next) => {
 }
 
 export const setResponseHeaders = (req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', process.env.ALLOW_ORIGIN)
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, DELETE, PATCH')
-    if (req.method === 'OPTIONS') {
-        res.status(200).send('OK')
+    if (req.headers.origin.includes(process.env.ALLOW_ORIGIN)) {
+        res.setHeader('Access-Control-Allow-Origin', req.headers.origin)
+        res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, DELETE, PATCH')
+        if (req.method === 'OPTIONS') {
+            res.status(200).send('OK')
+        } else {
+            next()
+        }
     } else {
-        next()
+        res.status(400).send('BAD_REQUEST')
     }
 }
